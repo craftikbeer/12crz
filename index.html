@@ -15,12 +15,684 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet" />
   <!-- Стили -->
-  <link rel="stylesheet" href="App.css">
-  <!-- Иконка -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍺</text></svg>">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Rubik:wght@400;500;600&display=swap');
+
+    :root {
+      --accent: #FF6B35;
+      --bg: #fafafa;
+      --text: #222;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER */
+    .header {
+      padding: 20px 0;
+      background: white;
+      box-shadow: 0 2px 10px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+    }
+
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .nav-desktop {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-desktop a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-desktop a:hover {
+      color: var(--accent);
+    }
+
+    .nav-mobile {
+      display: none;
+    }
+
+    .cart-icon {
+      background: var(--accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .cart-icon:hover {
+      background: #e55a2b;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, transparent 20%, var(--bg) 100%);
+      animation: rotate 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero-punch {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: slide-up 1s ease-out 0.5s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fade-in 1s ease-out 1s forwards;
+    }
+
+    @keyframes slide-up {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+
+    .cta-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    /* SECTIONS */
+    .section-title {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      margin: 60px 0 40px;
+      color: var(--text);
+    }
+
+    /* BEERS */
+    .beers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .beer-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px var(--shadow);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s ease;
+    }
+
+    .beer-card.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .beer-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .beer-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .beer-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .beer-info {
+      padding: 25px;
+    }
+
+    .beer-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .beer-desc {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .beer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .beer-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .beer-btn:hover {
+      background: #e55a2b;
+    }
+
+    /* CART */
+    .cart-section {
+      padding: 80px 0;
+      background: #f8f9fa;
+    }
+
+    .empty-cart {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+    }
+
+    .cart-items {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #ff6b35;
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    /* MAP */
+    .map-section {
+      padding: 80px 0;
+    }
+
+    .map-container {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px var(--shadow);
+    }
+
+    /* ORDER */
+    .order-section {
+      padding: 80px 0;
+      background: #f8f9fa;
+    }
+
+    .order-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px var(--shadow);
+    }
+
+    .order-form input,
+    .order-form textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    .order-form input:focus,
+    .order-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .order-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .order-btn:hover {
+      background: #e55a2b;
+    }
+
+    .success-message {
+      text-align: center;
+      font-size: 1.3rem;
+      color: #28a745;
+      font-weight: 600;
+      padding: 40px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px var(--shadow);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #222;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 1rem;
+      margin: 5px 0;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-desktop { display: none; }
+      .nav-mobile { display: block; }
+      
+      .burger {
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+      }
+
+      .mobile-menu {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border-radius: 0 0 16px 16px;
+      }
+
+      .mobile-menu a {
+        text-decoration: none;
+        color: var(--text);
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .mobile-menu a:hover {
+        background: #f8f9fa;
+        color: var(--accent);
+      }
+
+      .hero-punch { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+      .cart-icon { padding: 6px 12px; font-size: 0.9rem; }
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      animation: fade-in-up 0.6s ease forwards;
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="module" src="index.js"></script>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <h1>Craftik Beer</h1>
+      <div class="nav-desktop">
+        <a href="#beers">Пиво</a>
+        <a href="#map">Доставка</a>
+        <a href="#order">Заказ</a>
+      </div>
+      <div class="nav-mobile">
+        <button onclick="toggleMenu()" class="burger">☰</button>
+        <div id="mobile-menu" class="mobile-menu" style="display:none;">
+          <a href="#beers" onclick="toggleMenu()">Пиво</a>
+          <a href="#map" onclick="toggleMenu()">Доставка</a>
+          <a href="#order" onclick="toggleMenu()">Заказ</a>
+        </div>
+      </div>
+      <div class="cart-icon" onclick="scrollToCart()">🛒 <span id="cart-count">0</span></div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <h2 class="hero-punch" id="hero-text"></h2>
+      <p class="hero-subtitle">Свежее крафтовое пиво ручной работы — прямо в Каарсте. Закажи сейчас — привезем за 30 минут.</p>
+      <button class="cta-btn" onclick="scrollToBeers()">Выбрать пиво →</button>
+    </div>
+  </section>
+
+  <!-- BEERS -->
+  <section id="beers" class="beers-section">
+    <div class="container">
+      <h2 class="section-title">Наши сорта</h2>
+      <div class="beers-grid" id="beers-grid">
+        <!-- Пиво будет добавлено через JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CART -->
+  <section id="cart" class="cart-section">
+    <div class="container">
+      <h2 class="section-title">Ваш заказ</h2>
+      <div id="cart-content">
+        <p class="empty-cart">Корзина пуста. Выберите пиво выше 🍺</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map" class="map-section">
+    <div class="container">
+      <h2 class="section-title">Доставка по Каарсту</h2>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.226785655768!2d6.671286415738263!3d51.19494997956579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8e5e7c5a5e5e5%3A0x5a5a5a5a5a5a5a5a!2sKaarst%2C%20Germany!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
+          width="100%"
+          height="400"
+          style="border:0; border-radius: 16px;"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER FORM -->
+  <section id="order" class="order-section">
+    <div class="container">
+      <h2 class="section-title">Оформить заказ</h2>
+      <div id="order-success" style="display:none;" class="success-message">✅ Заказ принят! Мы перезвоним вам в течение 10 минут.</div>
+      <form id="order-form" class="order-form">
+        <input type="text" name="name" placeholder="Ваше имя" required />
+        <input type="tel" name="phone" placeholder="Телефон" required />
+        <textarea name="comment" placeholder="Комментарий (адрес, этаж, код и т.д.)" rows="3"></textarea>
+        <button type="submit" class="order-btn">Оформить заказ 🍻</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Craftik Beer — Каарст. Пиво с душой и хмелем 🍻</p>
+      <p>Доставка ежедневно с 16:00 до 23:00</p>
+    </div>
+  </footer>
+
+  <script>
+    const beers = [
+      {
+        id: 1,
+        name: "Хмельной Закат",
+        desc: "Цитрусовый IPA с нотками грейпфрута и хвои. Крепкий, насыщенный, с горчинкой.",
+        abv: "6.8%",
+        price: 12.9,
+        img: "https://images.unsplash.com/photo-1546173159-2ed430595600?w=400&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 2,
+        name: "Лесной Эль",
+        desc: "Темный эль с ароматом карамели, кофе и легкой дымности. Идеален для вечера.",
+        abv: "5.5%",
+        price: 11.5,
+        img: "https://images.unsplash.com/photo-1577995596872-444a6d77c05d?w=400&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 3,
+        name: "Каарстский Лагер",
+        desc: "Чистый, свежий лагер с легкой хрустящей горчинкой. Пьется как вода — но вкуснее!",
+        abv: "4.9%",
+        price: 9.9,
+        img: "https://images.unsplash.com/photo-1540277113249-39a8b7da3d7f?w=400&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 4,
+        name: "Ягодный Госсе",
+        desc: "Кисло-сладкий берлинский вайс с малиной и ежевикой. Освежает даже в жару.",
+        abv: "4.2%",
+        price: 13.5,
+        img: "https://images.unsplash.com/photo-1605559424837-22b1a9a7f68e?w=400&auto=format&fit=crop&q=80",
+      },
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Анимация Hero
+    const punchline = "Пиво, которое говорит с тобой 🍻";
+    let i = 0;
+    const timer = setInterval(() => {
+      document.getElementById('hero-text').textContent = punchline.slice(0, ++i);
+      if (i === punchline.length) clearInterval(timer);
+    }, 80);
+
+    // Показать пиво
+    setTimeout(() => {
+      const grid = document.getElementById('beers-grid');
+      beers.forEach((beer, idx) => {
+        const card = document.createElement('div');
+        card.className = 'beer-card fade-in';
+        card.style.animationDelay = `${idx * 0.2}s`;
+        card.innerHTML = `
+          <img src="${beer.img}" alt="${beer.name}" loading="lazy" />
+          <div class="beer-info">
+            <h3>${beer.name}</h3>
+            <p class="beer-desc">${beer.desc}</p>
+            <div class="beer-meta">
+              <span>${beer.abv}</span>
+              <strong>${beer.price.toFixed(2)}€</strong>
+            </div>
+            <button class="beer-btn" onclick="addToCart(${beer.id})">Добавить в корзину</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }, 1500);
+
+    // Функции
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function scrollToBeers() {
+      document.getElementById('beers').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToCart() {
+      document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function addToCart(id) {
+      const beer = beers.find(b => b.id === id);
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...beer, qty: 1 });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function updateCart() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cart-count').textContent = count;
+
+      const content = document.getElementById('cart-content');
+      if (cart.length === 0) {
+        content.innerHTML = '<p class="empty-cart">Корзина пуста. Выберите пиво выше 🍺</p>';
+      } else {
+        let html = '<div class="cart-items">';
+        cart.forEach(item => {
+          html += `
+            <div class="cart-item">
+              <span>${item.name} × ${item.qty}</span>
+              <span>${(item.price * item.qty).toFixed(2)}€</span>
+              <button onclick="removeFromCart(${item.id})" class="remove-btn">×</button>
+            </div>
+          `;
+        });
+        html += '</div>';
+        html += `<div class="cart-total">Итого: <strong>${cart.reduce((sum, item) => sum + item.price * item.qty, 0).toFixed(2)}€</strong></div>`;
+        content.innerHTML = html;
+      }
+    }
+
+    // Обработчик формы
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.name.value;
+      const phone = this.phone.value;
+      if (!name || !phone) {
+        alert('Заполните имя и телефон!');
+        return;
+      }
+      console.log('Заказ:', { name, phone, comment: this.comment.value, cart });
+      document.getElementById('order-success').style.display = 'block';
+      this.style.display = 'none';
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+      setTimeout(() => {
+        document.getElementById('order-success').style.display = 'none';
+        this.style.display = 'block';
+        this.reset();
+      }, 3000);
+    });
+
+    // Инициализация корзины
+    updateCart();
+  </script>
 </body>
 </html>
