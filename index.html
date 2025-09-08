@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Карнавал в Каарсте | Приходи в цветах Каарста — получи пиво</title>
+  <title>Карнавал в Каарсте — Приходи в цветах Каарста, получи пиво!</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* Общие стили */
@@ -11,17 +11,14 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Arial', sans-serif;
     }
 
     body {
       background-color: #f7d352;
       color: #1a1a1a;
       line-height: 1.6;
-      overflow-x: hidden;
     }
-
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
     .container {
       max-width: 1200px;
@@ -29,17 +26,13 @@
       padding: 0 20px;
     }
 
-    /* Голова */
+    /* Шапка */
     header {
+      background-color: #2c2c2c;
+      padding: 20px 0;
       position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       overflow: hidden;
-      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080/2c2c2c/ffffff?text=Карнавал+в+Каарсте') no-repeat center center/cover;
-      color: white;
+      text-align: center;
     }
 
     header::before {
@@ -49,202 +42,151 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('https://via.placeholder.com/1920x1080/000/fff?text=Текстура+карнавала');
-      background-size: 400% 400%;
-      animation: moveBg 10s ease infinite;
-      opacity: 0.1;
+      background-image: url('https://via.placeholder.com/1920x600/2c2c2c/ffffff?text=Карнавал+в+Каарсте');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3;
       z-index: 1;
-    }
-
-    @keyframes moveBg {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     header .content {
       position: relative;
       z-index: 2;
-      max-width: 800px;
+      color: white;
       padding: 20px;
     }
 
     header h1 {
-      font-size: 5rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      letter-spacing: 1px;
+      font-size: 4rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 
     header p {
       font-size: 1.5rem;
-      margin-bottom: 30px;
-      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     }
 
-    .btn-primary {
+    .btn {
       display: inline-block;
-      padding: 15px 40px;
-      background: linear-gradient(to right, #e88b00, #d45b00);
+      padding: 12px 30px;
+      background-color: #e88b00;
       color: white;
       text-decoration: none;
-      font-weight: 600;
-      border-radius: 50px;
-      transition: all 0.4s ease;
-      box-shadow: 0 4px 15px rgba(232, 139, 0, 0.3);
-      border: none;
-      cursor: pointer;
-      font-size: 1.1rem;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(232, 139, 0, 0.5);
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      padding: 15px 40px;
-      background: transparent;
-      color: #e88b00;
-      text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
+      border-radius: 30px;
+      transition: all 0.3s ease;
       border: 2px solid #e88b00;
-      border-radius: 50px;
-      transition: all 0.4s ease;
-      margin-left: 20px;
+      margin: 10px;
+    }
+
+    .btn:hover {
+      background-color: transparent;
+      color: #e88b00;
+      transform: scale(1.05);
+    }
+
+    /* Основной контент */
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 60px 0;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .text-section {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .text-section h2 {
+      font-size: 2.5rem;
+      color: #2c2c2c;
+      margin-bottom: 20px;
+    }
+
+    .text-section p {
       font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #333;
     }
 
-    .btn-secondary:hover {
-      background: #e88b00;
-      color: white;
-      transform: translateY(-5px);
-    }
-
-    /* Секция "Цвета Каарста" */
-    .colors-section {
-      padding: 100px 0;
-      background: #2c2c2c;
-      color: white;
+    .beer-image {
+      flex: 1;
+      min-width: 300px;
       text-align: center;
     }
 
+    .beer-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .beer-image img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Цвета Каарста */
+    .colors-section {
+      background-color: #2c2c2c;
+      padding: 40px 0;
+      margin: 40px 0;
+      text-align: center;
+      color: white;
+    }
+
     .colors-section h2 {
-      font-size: 3rem;
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
 
     .color-palette {
       display: flex;
       justify-content: center;
-      gap: 30px;
-      margin: 40px 0;
-      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px 0;
     }
 
-    .color-item {
-      position: relative;
-      width: 120px;
-      height: 120px;
+    .color-box {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: white;
-      transition: transform 0.3s ease;
+      border: 3px solid white;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      border: 3px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
     }
 
-    .color-item:hover {
+    .color-box:hover {
       transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .color-item:nth-child(1) { background: #e88b00; }
-    .color-item:nth-child(2) { background: #f7d352; }
-    .color-item:nth-child(3) { background: #2c2c2c; }
-    .color-item:nth-child(4) { background: white; }
+    .color-box:nth-child(1) { background-color: #e88b00; }
+    .color-box:nth-child(2) { background-color: #f7d352; }
+    .color-box:nth-child(3) { background-color: #2c2c2c; }
+    .color-box:nth-child(4) { background-color: #fff; }
 
-    .color-name {
-      margin-top: 15px;
+    .colors-section p {
+      margin-top: 20px;
       font-size: 1.1rem;
     }
 
-    /* Баннер с пивом */
-    .beer-banner {
-      padding: 80px 0;
-      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://via.placeholder.com/1920x800/1a1a1a/ffffff?text=Пиво+на+карнавале') no-repeat center center/cover;
+    /* Нижняя часть */
+    footer {
+      background-color: #1a1a1a;
       color: white;
       text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .beer-banner::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(232, 139, 0, 0.2), transparent 70%);
-      z-index: 1;
-    }
-
-    .beer-banner .content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .beer-banner h2 {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .beer-banner p {
-      font-size: 1.3rem;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .beer-banner img {
-      width: 200px;
-      margin: 30px auto;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease;
-    }
-
-    .beer-banner img:hover {
-      transform: scale(1.05);
-    }
-
-    /* Футер */
-    footer {
-      background: #1a1a1a;
-      color: #ddd;
-      text-align: center;
-      padding: 40px 0;
+      padding: 30px 0;
       margin-top: 40px;
     }
 
     footer p {
       margin-bottom: 15px;
-      font-size: 1rem;
     }
 
     footer a {
@@ -259,11 +201,28 @@
     /* Адаптивность */
     @media (max-width: 768px) {
       header h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
       }
 
       header p {
         font-size: 1.2rem;
+      }
+
+      .main-content {
+        flex-direction: column;
+      }
+
+      .beer-image {
+        order: -1;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      .colors-section h2 {
+        font-size: 2rem;
       }
 
       .color-palette {
@@ -271,77 +230,62 @@
         align-items: center;
       }
 
-      .color-item {
-        width: 80px;
-        height: 80px;
-        font-size: 1rem;
-      }
-
-      .beer-banner h2 {
-        font-size: 2.5rem;
-      }
-
-      .beer-banner img {
-        width: 150px;
+      .color-box {
+        width: 60px;
+        height: 60px;
+        margin: 10px 0;
       }
     }
   </style>
 </head>
 <body>
-
   <!-- Шапка -->
   <header>
     <div class="content">
       <h1>Карнавал в Каарсте</h1>
-      <p>Приходи в цветах Каарста — получи пиво!</p>
-      <a href="#register" class="btn-primary">Зарегистрироваться</a>
-      <a href="#info" class="btn-secondary">Подробнее</a>
+      <p>Приходи в цветах Каарста, получи пиво!</p>
+      <a href="#register" class="btn">Зарегистрироваться</a>
+      <a href="#info" class="btn">Подробнее</a>
     </div>
   </header>
 
+  <!-- Основной контент -->
+  <div class="container">
+    <div class="main-content">
+      <div class="text-section">
+        <h2>Самый яркий карнавал в Германии</h2>
+        <p>Каждый год в городе Каарст проходит уникальный карнавальный праздник, объединяющий жителей и гостей со всего мира. Это не просто фестиваль — это культурное событие, где каждый может выразить себя через костюмы, музыку и танцы.</p>
+        <p>Приходите в цветах Каарста — оранжевом, золотом, чёрном и белом — и получите бесплатное пиво! Это ваш шанс стать частью истории.</p>
+        <p><strong>Дата:</strong> 15 февраля 2024 года<br><strong>Место:</strong> Главная площадь Каарста</p>
+      </div>
+      <div class="beer-image">
+        <img src="https://via.placeholder.com/400x500/e88b00/ffffff?text=Пиво+в+Каарсте" alt="Пиво на карнавале в Каарсте" />
+      </div>
+    </div>
+  </div>
+
   <!-- Цвета Каарста -->
-  <section class="colors-section">
+  <div class="colors-section">
     <div class="container">
       <h2>Цвета Каарста</h2>
+      <p>Наденьте костюм в этих цветах и получите бесплатное пиво!</p>
       <div class="color-palette">
-        <div class="color-item">
-          <i class="fas fa-star"></i>
-          <div class="color-name">Оранжевый</div>
-        </div>
-        <div class="color-item">
-          <i class="fas fa-sun"></i>
-          <div class="color-name">Золотой</div>
-        </div>
-        <div class="color-item">
-          <i class="fas fa-moon"></i>
-          <div class="color-name">Чёрный</div>
-        </div>
-        <div class="color-item">
-          <i class="fas fa-cloud"></i>
-          <div class="color-name">Белый</div>
-        </div>
+        <div class="color-box"></div>
+        <div class="color-box"></div>
+        <div class="color-box"></div>
+        <div class="color-box"></div>
       </div>
-      <p>Наденьте костюм в этих цветах и получите бесплатное пиво на входе!</p>
+      <p>Оранжевый — символ энергии, Золотой — богатство, Чёрный — традиции, Белый — чистота.</p>
     </div>
-  </section>
-
-  <!-- Баннер с пивом -->
-  <section class="beer-banner">
-    <div class="content">
-      <h2>Пиво — сердце карнавала</h2>
-      <p>Свежее, местное, ручной работы. Каждый гость в цветах Каарста получает бесплатную порцию пива.</p>
-      <img src="https://via.placeholder.com/200x300/e88b00/ffffff?text=Пиво+в+Каарсте" alt="Пиво на карнавале" />
-    </div>
-  </section>
+  </div>
 
   <!-- Подвал -->
   <footer>
     <div class="container">
       <p>© 2024 Карнавал в Каарсте. Все права защищены.</p>
-      <p>Официальный сайт: <a href="https://www.karneval-kaarst.de">karneval-kaarst.de</a></p>
-      <p>Контакт: <a href="mailto:info@karneval-kaarst.de">info@karneval-kaarst.de</a></p>
+      <p>Для вопросов: <a href="mailto:info@karneval-kaarst.de">info@karneval-kaarst.de</a></p>
+      <p>Официальный сайт: <a href="https://www.karneval-kaarst.de">www.karneval-kaarst.de</a></p>
     </div>
   </footer>
-
 </body>
 </html>
